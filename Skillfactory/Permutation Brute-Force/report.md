@@ -3,17 +3,13 @@
 ## 🔍 Initialization
 
 ### Есть тест, предполагающий несколько вариантов правильных ответов.  
-<div align="center">
-  <img width="1875" height="934" alt="image" src="https://github.com/user-attachments/assets/4fe3ee0a-980a-485d-b90b-1546f7fe2757" />
-</div>
+![init](screenshots/01.png)
 
 
 ## 🕵️ Enumeration
 
 ### Перехватываю отправляемый запрос в Burp Suite  
-<div align="center">
-  <img width="1916" height="902" alt="image" src="https://github.com/user-attachments/assets/757b4758-a9ab-4a0a-8cb2-0b8261f96189" />  
-</div>  
+![burp_intercept](screenshots/02.png) 
   
   
 #### Payload в URL encoded:  
@@ -24,9 +20,7 @@ input_7e44eb6d37ea49b8844fa93a96ea014f_2_1[]=choice_0
 #### Если ответ неправильный, то в `Response` возвращается `json`, содержащий `"success": "incorrect"`  
 
 ### Смотрю исходный код отмеченного чекбокса
-<div align="center">  
-  <img width="1875" height="929" alt="image" src="https://github.com/user-attachments/assets/32a54be2-f34c-4a89-965a-dc93c073440b" />  
-</div>  
+![html](screenshots/03.png)  
 
 #### Т.е. получается, что в запросе отправляется `name` и `value` отмеченных чекбоксов.
 
@@ -98,38 +92,29 @@ input_7e44eb6d37ea49b8844fa93a96ea014f_2_1%5B%5D=choice_1
 Добавляю `Position` на всю `payload` post запроса.  
 Загружаю сгенерированный скриптом словарь, содержащий в данном случае 127 комбинаций.  
 Убираю отметку `URL-encode these chatacters`  
-
-<div align="center">
-  <img width="1918" height="900" alt="image" src="https://github.com/user-attachments/assets/1c0cd632-3829-4382-93b6-8875b7907269" />
-</div> 
+![burp_intruder](screenshots/04.png)
 
 
 ### Настраиваю вкладку `Settings` для `Intruder`.  
 Добавляю остановку атаки, если в `Response` будет отсутствовать `"success": "incorrect"`.  
-  
-
 <div align="center">
-  <img width="488" height="855" alt="image" src="https://github.com/user-attachments/assets/30fc9a4f-e1e8-409d-ab12-854d5fa5a19f" />
-</div>  
+  <img src="screenshots/05.png" alt="burp_settings">
+</div>
+
 
 ### Также хочу отобразить дополнительную колонку в результатах вывода, с помощью `Grep - Extract`  
+![grep_extract](screenshots/06.png)
 
-<div align="center">
-  <img width="1178" height="880" alt="image" src="https://github.com/user-attachments/assets/4c82ce32-869f-4dac-a6ef-948c101be8f6" />
-</div> 
 
 ### Сортирую результаты атаки по дополнительному столбцу и получаю правильную комбинацию ответов:  
-<div align="center">
-  <img width="1477" height="838" alt="image" src="https://github.com/user-attachments/assets/ecae7fe5-7289-4f81-9000-cdeb854b5046" />  
-</div>  
+![burp_attack](screenshots/07.png)  
+
 
 ## 🏁 Result
 Если запускать атаку синхронно, то достаточно будет просто обновить страницу в браузере, вопрос автоматически будет отмечен, как правильно отвеченный.  
 Но так как в данном случае атака происходила асинхронно, необходимо отметить правильные варианты и нажать **Отправить**  
+![result](screenshots/08.png)
 
-<div align="center">
-  <img width="1875" height="928" alt="image" src="https://github.com/user-attachments/assets/06ae3f70-882a-40ec-8ae7-2c372e851ca9" />
-</div>
 
 ## 📋 Резюме
 
